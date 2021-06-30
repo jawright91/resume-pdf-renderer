@@ -1,10 +1,16 @@
 <template>
-  <div></div>
+  <div>
+    <div id="content">
+      {{ source }}
+      <button v-on:click="createPdf">Button</button>
+    </div>
+    <div id="elementH"></div>
+  </div>
 </template>
 <style></style>
 <script>
 // eslint-disable-next-line no-unused-vars
-import jspdf from "jspdf";
+import jsPDF from "jspdf";
 // eslint-disable-next-line no-unused-vars
 import jquery from "jquery";
 
@@ -36,9 +42,9 @@ export default {
           {
             start_date: "March 7, 2015",
             end_date: "March 7, 2018",
-            job_title: "Janitor/Insurance Salesman",
+            job_title: "Insurance Salesman",
             company_name: "Evil Corp",
-            details: "Sold life, boat, volcano insurance policies. Oversaw sanitation of headquarters.",
+            details: "Sold life, boat, volcano insurance policies.",
           },
         ],
         education: [
@@ -59,6 +65,23 @@ export default {
         ],
       },
     };
+  },
+  methods: {
+    createPdf() {
+      var doc = new jsPDF({
+        orientation: "portrait",
+      });
+
+      doc.text(20, 20, this.source.first_name);
+      doc.text(20, 30, "This is client-side Javascript to generate a PDF.");
+
+      // Add new page
+      doc.addPage();
+      doc.text(20, 20, "Visit semicolonworld.com");
+
+      // Save the PDF
+      doc.save("document.pdf");
+    },
   },
 };
 </script>
