@@ -13,6 +13,8 @@
 import jsPDF from "jspdf";
 // eslint-disable-next-line no-unused-vars
 import jquery from "jquery";
+// eslint-disable-next-line no-unused-vars
+import axios from "axios";
 
 export default {
   setup() {},
@@ -31,7 +33,7 @@ export default {
         online_resume_url: "livejournal.com/alexapple",
         github_url: "github.com/alexapple",
         photo: "https://informationcradle.com/wp-content/uploads/2020/05/5a3d391bd0e56.image-1.jpg",
-        experience: [
+        experiences: [
           {
             start_date: "March 7, 2018",
             end_date: null,
@@ -47,7 +49,7 @@ export default {
             details: "Sold life, boat, volcano insurance policies.",
           },
         ],
-        education: [
+        educations: [
           {
             start_date: "August 5, 2013",
             end_date: "May 28, 2015",
@@ -71,13 +73,22 @@ export default {
       var doc = new jsPDF({
         orientation: "portrait",
       });
-
-      doc.text(20, 20, this.source.first_name);
-      doc.text(20, 30, "This is client-side Javascript to generate a PDF.");
+      doc.text(20, 20, `${this.source.first_name} ${this.source.last_name}`);
+      doc.text(20, 30, this.source.email);
+      doc.text(20, 40, this.source.phone_number);
+      doc.text(20, 50, this.source.short_bio);
+      doc.text(20, 60, this.source.linkedin_url);
+      doc.text(20, 70, this.source.twitter_handle);
+      doc.text(20, 80, this.source.personal_blog);
+      doc.text(20, 90, this.source.online_resume_url);
+      doc.text(20, 100, this.source.github_url);
+      doc.text(20, 110, this.source.photo);
+      // doc.text(20, 20, this.source.experiences);
+      // doc.text(20, 30, "This is client-side Javascript to generate a PDF.");
 
       // Add new page
       doc.addPage();
-      doc.text(20, 20, "Visit semicolonworld.com");
+      // doc.text(20, 20, "Visit semicolonworld.com");
 
       // Save the PDF
       doc.save("document.pdf");
