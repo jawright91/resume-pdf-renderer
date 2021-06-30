@@ -1,9 +1,105 @@
 <template>
   <div>
     <div id="content">
-      {{ source }}
-      <button v-on:click="createPdf">Button</button>
+      <p>Select Whose Resume to convert to PDF:</p>
+      <button v-for="student in students" v-bind:key="student.id" v-on:click="makeActive(student)">
+        {{ student.first_name }} {{ student.last_name }}
+      </button>
+      <h2>Biographical Information</h2>
+      <p>
+        First Name:
+        <input v-model="source.first_name" />
+      </p>
+      <p>
+        Last Name:
+        <input v-model="source.last_name" />
+      </p>
+      <p>
+        Email:
+        <input v-model="source.email" />
+      </p>
+      <p>
+        Phone Number:
+        <input v-model="source.phone_number" />
+      </p>
+      <p>
+        Short Biography:
+        <input v-model="source.short_bio" />
+      </p>
+      <p>
+        LinkedIn URL:
+        <input v-model="source.linkedin_url" />
+      </p>
+      <p>
+        Twitter Handle:
+        <input v-model="source.twitter_handle" />
+      </p>
+      <p>
+        Personal Blog:
+        <input v-model="source.personal_blog" />
+      </p>
+      <p>
+        Online Resume URL:
+        <input v-model="source.online_resume_url" />
+      </p>
+      <p>
+        Github URL:
+        <input v-model="source.github_url" />
+      </p>
+      <p>
+        Photo URL:
+        <input v-model="source.photo" />
+      </p>
+      <h2>Experience</h2>
+      <div class="experiences" v-for="experience in source.experiences" v-bind:key="experience.id">
+        <h3>{{ experience.job_title }} at {{ experience.company_name }}</h3>
+        <p>
+          Start Date:
+          <input v-model="experience.start_date" />
+        </p>
+        <p>
+          End Date:
+          <input v-model="experience.end_date" />
+        </p>
+        <p>
+          Job Title:
+          <input v-model="experience.job_title" />
+        </p>
+        <p>
+          Company Name:
+          <input v-model="experience.company_name" />
+        </p>
+        <p>
+          Details:
+          <input v-model="experience.details" />
+        </p>
+      </div>
     </div>
+    <h2>Eductaion</h2>
+    <div class="education" v-for="education in source.educations" v-bind:key="education.id">
+      <h3>{{ education.degree }} at {{ education.university_name }}</h3>
+      <p>
+        Start Date:
+        <input v-model="education.start_date" />
+      </p>
+      <p>
+        End Date:
+        <input v-model="education.end_date" />
+      </p>
+      <p>
+        Job Title:
+        <input v-model="education.degree" />
+      </p>
+      <p>
+        Company Name:
+        <input v-model="education.university_name" />
+      </p>
+      <p>
+        Details:
+        <input v-model="education.details" />
+      </p>
+    </div>
+    <button v-on:click="createPdf">Create PDF</button>
     <div id="elementH"></div>
   </div>
 </template>
@@ -35,6 +131,7 @@ export default {
         photo: "https://informationcradle.com/wp-content/uploads/2020/05/5a3d391bd0e56.image-1.jpg",
         experiences: [
           {
+            id: 1,
             start_date: "March 7, 2018",
             end_date: null,
             job_title: "Actor",
@@ -42,6 +139,7 @@ export default {
             details: "Produced a live stage version of Edward Scissorhands",
           },
           {
+            id: 2,
             start_date: "March 7, 2015",
             end_date: "March 7, 2018",
             job_title: "Insurance Salesman",
@@ -51,6 +149,7 @@ export default {
         ],
         educations: [
           {
+            id: 1,
             start_date: "August 5, 2013",
             end_date: "May 28, 2015",
             degree: "Art History",
@@ -58,6 +157,7 @@ export default {
             details: "I went to harvard btw",
           },
           {
+            id: 2,
             start_date: "August 7, 2011",
             end_date: "May 9, 2012",
             degree: "Art Prehistory",
@@ -66,6 +166,7 @@ export default {
           },
         ],
       },
+      students: [],
     };
   },
   methods: {
@@ -92,6 +193,9 @@ export default {
 
       // Save the PDF
       doc.save("document.pdf");
+    },
+    makeActive(selection) {
+      this.source = selection;
     },
   },
 };
