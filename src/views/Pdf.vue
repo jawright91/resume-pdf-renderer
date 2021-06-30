@@ -73,8 +73,17 @@ export default {
       var doc = new jsPDF({
         orientation: "portrait",
       });
-      doc.text(20, 20, `${this.source.first_name} ${this.source.last_name}`);
-      doc.text(20, 30, this.source.email);
+      doc.setFontSize(24);
+      doc.text(
+        `${this.source.first_name} ${this.source.last_name}`,
+        doc.internal.pageSize.getWidth() / 2,
+        10,
+        null,
+        null,
+        "center"
+      );
+      doc.setFontSize(10);
+      doc.text(this.source.email, doc.internal.pageSize.getWidth() / 2, 15, null, null, "center");
       doc.text(20, 40, this.source.phone_number);
       doc.text(20, 50, this.source.short_bio);
       doc.text(20, 60, this.source.linkedin_url);
