@@ -1,6 +1,10 @@
 <template>
   <div>
     <div id="content">
+      <p>Select Whose Resume to convert to PDF:</p>
+      <button v-for="student in students" v-bind:key="student.id" v-on:click="makeActive(student)">
+        {{ student.first_name }} {{ student.last_name }}
+      </button>
       <h2>Biographical Information</h2>
       <p>
         First Name:
@@ -162,6 +166,7 @@ export default {
           },
         ],
       },
+      students: [],
     };
   },
   methods: {
@@ -188,6 +193,9 @@ export default {
 
       // Save the PDF
       doc.save("document.pdf");
+    },
+    makeActive(selection) {
+      this.source = selection;
     },
   },
 };
