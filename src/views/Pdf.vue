@@ -244,6 +244,7 @@ export default {
         this.students = response.data;
         console.log("hey ", this.students);
       });
+      git;
     },
     makeActive(selection) {
       this.source = selection;
