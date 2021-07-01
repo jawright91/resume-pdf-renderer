@@ -2,9 +2,11 @@
   <div>
     <div id="content">
       <p>Select Whose Resume to convert to PDF:</p>
-      <button v-for="student in students" v-bind:key="student.id" v-on:click="makeActive(student)">
-        {{ student.first_name }} {{ student.last_name }}
-      </button>
+      <select v-model="source">
+        <option v-for="student in students" :value="student" v-bind:key="student.id">
+          {{ student.first_name }} {{ student.last_name }}
+        </option>
+      </select>
       <h2>Biographical Information</h2>
       <p>
         First Name:
@@ -244,7 +246,6 @@ export default {
         this.students = response.data;
         console.log("hey ", this.students);
       });
-      git;
     },
     makeActive(selection) {
       this.source = selection;
