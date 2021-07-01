@@ -24,11 +24,11 @@
       </p>
       <p>
         Short Biography:
-        <input v-model="source.short_bio" />
+        <input v-model="source.bio" />
       </p>
       <p>
         LinkedIn URL:
-        <input v-model="source.linkedin_url" />
+        <input v-model="source.linkedin" />
       </p>
       <p>
         Twitter Handle:
@@ -36,15 +36,15 @@
       </p>
       <p>
         Personal Blog:
-        <input v-model="source.personal_blog" />
+        <input v-model="source.website" />
       </p>
       <p>
         Online Resume URL:
-        <input v-model="source.online_resume_url" />
+        <input v-model="source.resume_url" />
       </p>
       <p>
         Github URL:
-        <input v-model="source.github_url" />
+        <input v-model="source.github" />
       </p>
       <p>
         Photo URL:
@@ -121,13 +121,12 @@ export default {
         last_name: "Apple",
         email: "alex@example.com",
         phone_number: "8675309",
-        short_bio:
-          "Alexander A. Apple was born on a cold winter's day in Montana. He is a pretty cool guy who shoots aliens and doesn't afraid of anything.",
-        linkedin_url: "linkedin.com/alexaapple",
+        bio: "Alexander A. Apple was born on a cold winter's day in Montana. He is a pretty cool guy who shoots aliens and doesn't afraid of anything.",
+        linkedin: "linkedin.com/alexaapple",
         twitter_handle: "@realdonaldtrump",
-        personal_blog: "myspace.com/alexapple",
-        online_resume_url: "livejournal.com/alexapple",
-        github_url: "github.com/alexapple",
+        website: "myspace.com/alexapple",
+        resume_url: "livejournal.com/alexapple",
+        github: "github.com/alexapple",
         photo: "https://informationcradle.com/wp-content/uploads/2020/05/5a3d391bd0e56.image-1.jpg",
         experiences: [
           {
@@ -169,6 +168,9 @@ export default {
       students: [],
     };
   },
+  created: function () {
+    this.indexStudents();
+  },
   methods: {
     createPdf() {
       var doc = new jsPDF({
@@ -204,6 +206,12 @@ export default {
 
       // Save the PDF
       doc.save("document.pdf");
+    },
+    indexStudents: function () {
+      axios.get("https://guarded-ridge-08594.herokuapp.com/students").then((response) => {
+        this.students = response.data;
+        console.log("hey ", this.students);
+      });
     },
     makeActive(selection) {
       this.source = selection;
