@@ -222,8 +222,13 @@ export default {
       doc.setFontSize(15);
       linecoordinate += 5;
       doc.text(20, linecoordinate, this.source.photo);
-      // doc.text(20, 20, this.source.experiences);
-      // doc.text(20, 30, "This is client-side Javascript to generate a PDF.");
+      linecoordinate += 5;
+
+      // doc.text(20, linecoordinate, this.source.experiences);
+      this.source.experiences.forEach((experience) => {
+        doc.text(20, linecoordinate, experience.company_name);
+        linecoordinate += 5;
+      });
 
       // Add new page
       doc.addPage();
