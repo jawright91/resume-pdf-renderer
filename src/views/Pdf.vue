@@ -2,9 +2,11 @@
   <div>
     <div id="content">
       <p>Select Whose Resume to convert to PDF:</p>
-      <button v-for="student in students" v-bind:key="student.id" v-on:click="makeActive(student)">
-        {{ student.first_name }} {{ student.last_name }}
-      </button>
+      <select v-model="source">
+        <option v-for="student in students" :value="student" v-bind:key="student.id">
+          {{ student.first_name }} {{ student.last_name }}
+        </option>
+      </select>
       <h2>Biographical Information</h2>
       <p>
         First Name:
@@ -193,13 +195,13 @@ export default {
       doc.text(20, linecoordinate, "Short Bio:");
       linecoordinate += 5;
       doc.setFontSize(7);
-      doc.text(20, linecoordinate, this.source.short_bio);
+      doc.text(20, linecoordinate, this.source.bio);
       doc.setFontSize(15);
       linecoordinate += 10;
       doc.text(20, linecoordinate, "Linkedin URL");
       doc.setFontSize(5);
       linecoordinate += 5;
-      doc.text(20, linecoordinate, this.source.linkedin_url);
+      doc.text(20, linecoordinate, this.source.linkedin);
       doc.setFontSize(15);
       linecoordinate += 10;
       doc.text(20, linecoordinate, "Twitter Handle:");
@@ -210,32 +212,29 @@ export default {
       linecoordinate += 5;
       doc.text(20, linecoordinate, "Personal Blog");
       linecoordinate += 5;
-      doc.text(20, linecoordinate, this.source.personal_blog);
+      doc.text(20, linecoordinate, this.source.website);
       doc.setFontSize(15);
       linecoordinate += 5;
       doc.text(20, linecoordinate, "Online Resume URL");
       linecoordinate += 5;
-      doc.text(20, linecoordinate, this.source.online_resume_url);
+      doc.text(20, linecoordinate, this.source.resume_url);
       doc.setFontSize(10);
       linecoordinate += 5;
       doc.text(20, linecoordinate, "Github URL");
       linecoordinate += 5;
-      doc.text(20, linecoordinate, this.source.github_url);
+      doc.text(20, linecoordinate, this.source.github);
       doc.setFontSize(15);
       linecoordinate += 5;
       doc.text(20, linecoordinate, this.source.photo);
       linecoordinate += 5;
-
       // doc.text(20, linecoordinate, this.source.experiences);
       this.source.experiences.forEach((experience) => {
         doc.text(20, linecoordinate, experience.company_name);
         linecoordinate += 5;
       });
-
       // Add new page
       doc.addPage();
       // doc.text(20, 20, "Visit semicolonworld.com");
-
       // Save the PDF
       doc.save("document.pdf");
     },
@@ -244,7 +243,6 @@ export default {
         this.students = response.data;
         console.log("hey ", this.students);
       });
-      git;
     },
     makeActive(selection) {
       this.source = selection;
