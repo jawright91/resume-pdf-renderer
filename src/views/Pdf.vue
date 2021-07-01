@@ -188,17 +188,49 @@ export default {
       doc.setFontSize(10);
       doc.text(this.source.email, doc.internal.pageSize.getWidth() / 2, 15, null, null, "center");
       doc.text(this.source.phone_number, doc.internal.pageSize.getWidth() / 2, 20, null, null, "center");
+      doc.setFontSize(15);
+      var linecoordinate = 45;
+      doc.text(20, linecoordinate, "Short Bio:");
+      linecoordinate += 5;
+      doc.setFontSize(7);
+      doc.text(20, linecoordinate, this.source.short_bio);
+      doc.setFontSize(15);
+      linecoordinate += 10;
+      doc.text(20, linecoordinate, "Linkedin URL");
       doc.setFontSize(5);
-      doc.text(20, 45, "Short Bio");
-      doc.text(20, 50, this.source.short_bio);
-      doc.text(20, 60, this.source.linkedin_url);
-      doc.text(20, 70, this.source.twitter_handle);
-      doc.text(20, 80, this.source.personal_blog);
-      doc.text(20, 90, this.source.online_resume_url);
-      doc.text(20, 100, this.source.github_url);
-      doc.text(20, 110, this.source.photo);
-      // doc.text(20, 20, this.source.experiences);
-      // doc.text(20, 30, "This is client-side Javascript to generate a PDF.");
+      linecoordinate += 5;
+      doc.text(20, linecoordinate, this.source.linkedin_url);
+      doc.setFontSize(15);
+      linecoordinate += 10;
+      doc.text(20, linecoordinate, "Twitter Handle:");
+      linecoordinate += 5;
+      doc.setFontSize(10);
+      doc.text(20, linecoordinate, this.source.twitter_handle);
+      doc.setFontSize(15);
+      linecoordinate += 5;
+      doc.text(20, linecoordinate, "Personal Blog");
+      linecoordinate += 5;
+      doc.text(20, linecoordinate, this.source.personal_blog);
+      doc.setFontSize(15);
+      linecoordinate += 5;
+      doc.text(20, linecoordinate, "Online Resume URL");
+      linecoordinate += 5;
+      doc.text(20, linecoordinate, this.source.online_resume_url);
+      doc.setFontSize(10);
+      linecoordinate += 5;
+      doc.text(20, linecoordinate, "Github URL");
+      linecoordinate += 5;
+      doc.text(20, linecoordinate, this.source.github_url);
+      doc.setFontSize(15);
+      linecoordinate += 5;
+      doc.text(20, linecoordinate, this.source.photo);
+      linecoordinate += 5;
+
+      // doc.text(20, linecoordinate, this.source.experiences);
+      this.source.experiences.forEach((experience) => {
+        doc.text(20, linecoordinate, experience.company_name);
+        linecoordinate += 5;
+      });
 
       // Add new page
       doc.addPage();
@@ -212,6 +244,7 @@ export default {
         this.students = response.data;
         console.log("hey ", this.students);
       });
+      git;
     },
     makeActive(selection) {
       this.source = selection;
