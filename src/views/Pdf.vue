@@ -195,13 +195,13 @@ export default {
       doc.text(20, linecoordinate, "Short Bio:");
       linecoordinate += 5;
       doc.setFontSize(7);
-      doc.text(20, linecoordinate, this.source.short_bio);
+      doc.text(20, linecoordinate, this.source.bio);
       doc.setFontSize(15);
       linecoordinate += 10;
       doc.text(20, linecoordinate, "Linkedin URL");
       doc.setFontSize(5);
       linecoordinate += 5;
-      doc.text(20, linecoordinate, this.source.linkedin_url);
+      doc.text(20, linecoordinate, this.source.linkedin);
       doc.setFontSize(15);
       linecoordinate += 10;
       doc.text(20, linecoordinate, "Twitter Handle:");
@@ -212,32 +212,29 @@ export default {
       linecoordinate += 5;
       doc.text(20, linecoordinate, "Personal Blog");
       linecoordinate += 5;
-      doc.text(20, linecoordinate, this.source.personal_blog);
+      doc.text(20, linecoordinate, this.source.website);
       doc.setFontSize(15);
       linecoordinate += 5;
       doc.text(20, linecoordinate, "Online Resume URL");
       linecoordinate += 5;
-      doc.text(20, linecoordinate, this.source.online_resume_url);
+      doc.text(20, linecoordinate, this.source.resume_url);
       doc.setFontSize(10);
       linecoordinate += 5;
       doc.text(20, linecoordinate, "Github URL");
       linecoordinate += 5;
-      doc.text(20, linecoordinate, this.source.github_url);
+      doc.text(20, linecoordinate, this.source.github);
       doc.setFontSize(15);
       linecoordinate += 5;
       doc.text(20, linecoordinate, this.source.photo);
       linecoordinate += 5;
-
       // doc.text(20, linecoordinate, this.source.experiences);
       this.source.experiences.forEach((experience) => {
         doc.text(20, linecoordinate, experience.company_name);
         linecoordinate += 5;
       });
-
       // Add new page
       doc.addPage();
       // doc.text(20, 20, "Visit semicolonworld.com");
-
       // Save the PDF
       doc.save("document.pdf");
     },
